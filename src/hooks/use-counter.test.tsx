@@ -9,6 +9,7 @@ describe("Test UseCounter Hook", () => {
 
     it("should increment the count", () => {
         const { result } = renderHook(() => useCounter());
+        // wait for state update
         act(() => {
             result.current.increment();
             result.current.increment();
