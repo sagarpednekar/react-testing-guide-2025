@@ -81,7 +81,6 @@ describe("addTodo", () => {
 
         // Wait for UI to update and check todo is rendered
         await waitFor(() => {
-            screen.debug();
             expect(screen.getByTestId("todos").children[0]).toHaveTextContent(mockResponse.text);
         });
     });

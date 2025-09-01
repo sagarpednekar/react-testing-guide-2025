@@ -1,12 +1,16 @@
 import { useContext, useState } from "react";
 
 import { TodosContext } from "../contexts/todos";
-import Todo from "../components/Todo";
+import Todo from "./todo";
 
 const Main = () => {
   const [todosState, , { toggleAll }] = useContext(TodosContext);
   const [editingId, setEditingId] = useState(null);
+  console.log("Todos State in Main:", todosState);
   const noTodosClass = todosState.todos.length === 0 ? "hidden" : "";
+  if (todosState.todos.length === 0) {
+    return null; // Don't render anything if there are no todos
+  }
   const isAllTodosSelected = todosState.todos.every((todo) => todo.isCompleted);
   const getVisibleTodos = () => {
     if (todosState.filter === "active") {

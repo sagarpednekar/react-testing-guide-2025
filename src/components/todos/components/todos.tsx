@@ -1,7 +1,7 @@
 import { TodosProvider } from "../contexts/todos";
-import Header from "./Header";
-import Footer from "./Footer";
-import Main from "./Main";
+import Header from "./header";
+import Footer from "./footer";
+import Main from "./main";
 import "../css/todo-mvc-base.css";
 import "../css/todo-mvc-app.css";
 

@@ -2,12 +2,22 @@ import { useEffect, useRef, useContext, useState } from "react";
 
 import { TodosContext } from "../contexts/todos";
 
-const Todo = ({ todo, isEditing, setEditingId }) => {
+type Props = {
+  todo: {
+    id: number;
+    text: string;
+    isCompleted: boolean;
+  };
+  isEditing: boolean;
+  setEditingId: (id: number | null) => void;
+};
+
+const Todo = ({ todo, isEditing, setEditingId }: Props) => {
   const editingClass = isEditing ? "editing" : "";
   const completedClass = todo.isCompleted ? "completed" : "";
   const [, , { updateTodo, removeTodo }] = useContext(TodosContext);
   const [editText, setEditText] = useState(todo.text);
-  const editInputEl = useRef(null);
+  const editInputEl = useRef<HTMLInputElement>(null);
 
   const setTodoInEditingMode = () => {
     setEditingId(todo.id);
@@ -18,13 +28,17 @@ const Todo = ({ todo, isEditing, setEditingId }) => {
       isCompleted: !todo.isCompleted,
     });
   };
-  const changeEditInput = (event) => {
+  interface ChangeEditInputEvent {
+    target: { value: string };
+  }
+
+  const changeEditInput = (event: ChangeEditInputEvent) => {
     setEditText(event.target.value);
   };
-  const keyDownEditInput = (event) => {
+  const keyDownEditInput = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       updateTodo(todo.id, {
-        text: event.target.value,
+        text: event.currentTarget.value,
         isCompleted: todo.isCompleted,
       });
       setEditingId(null);
@@ -37,7 +51,7 @@ const Todo = ({ todo, isEditing, setEditingId }) => {
   };
 
   useEffect(() => {
-    if (isEditing) {
+    if (isEditing && editInputEl.current) {
       editInputEl.current.focus();
     }
   });

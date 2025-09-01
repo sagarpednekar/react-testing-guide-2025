@@ -6,11 +6,11 @@ const Header = () => {
   const [text, setText] = useState("");
   const [, , { addTodo }] = useContext(TodosContext);
 
-  const changeText = (event) => {
+  const changeText = (event: any) => {
     setText(event.target.value);
   };
 
-  const keydownText = (event) => {
+  const keydownText = (event: any) => {
     const isEnter = event.key === "Enter";
     const newText = text.trim();
     const isTextPresent = newText.length > 0;
