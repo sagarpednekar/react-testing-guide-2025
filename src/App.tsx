@@ -1,8 +1,9 @@
+import Todos from "./components/todos/components/todos"
 
 function App() {
   return (
     <>
-      <h1>Hello World!</h1>
+      <Todos />
     </>
   )
 }

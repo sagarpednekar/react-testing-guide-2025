@@ -59,7 +59,6 @@ describe("Use Fetch Hook", () => {
         ];
         expect(isLoading).toBe(false);
         expect(response).toBe(null);
-        console.log(error);
         expect(error).toBe(mockError);
     });
 });
